@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  backend:
+    image: myrachanto/demyst-backend
+    container_name: backend
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo-database
+    command: ["/app/demyst"]
+
+  frontend: 
+    image: myrachanto/demyst-frontend
+    container_name: frontend
+    ports:
+      - "8080:8080"
+  mongodb: 
+    image: 'mongo:latest'
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
